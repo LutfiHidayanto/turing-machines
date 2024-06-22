@@ -1,0 +1,432 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+    font-size: medium;
+    background-color: #1f2937;
+    color: #f8f9fa; /* Light text color */
+}
+
+nav a {
+    color: white;
+}
+
+
+#input-form {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    flex-basis: content;
+}
+
+#input-form input {
+    background-color: white;
+}
+
+#text-desc,
+#input-container,
+#btn-container {
+    padding: 5px;
+}
+
+#input-string {
+    width: 300px;
+}
+
+#status-container,
+#stepCountOutput,
+#tapeOutput1, #tapeOutput2, #tapeOutput3,
+#stateOutput,
+#statusOutput {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid white;
+    flex-basis: content;
+    margin: 10px;
+}
+
+#status-container {
+    margin-bottom: 0;
+}
+
+#small-container {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+#tapeOutput1, #tapeOutput2, #tapeOutput3 {
+    max-width: 1000px;
+}
+
+#stepCountOutput,
+#stateOutput,
+#statusOutput {
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#output1, #output2, #output3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#output1 div, #output2 div, #output3 div {
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#output1 span, #output2 span, #output3 span {
+    outline: white solid 4px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ending {
+    margin-bottom: 10px;
+}
+
+#point1, #point2, #point3 {
+    background-color: green;
+}
+
+#point1 span, #point2 span, #point3 span {
+    height: 60px;
+    width: 60px;
+}
+
+#nav {
+    text-decoration: none;
+    color: black;
+}
+
+h2 {
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.animateLeft,
+.animateRight,
+.animatePop {
+    transition: 1s;
+    transition-timing-function: cubic-bezier(.60, 0, .40, 1);
+}
+
+.beforePoint1.animateLeft,
+.point1.animateLeft {
+    transform: translateX(59px);
+}
+
+.beforePoint1.animateLeft {
+    font-size: xx-large;
+}
+
+.afterEdge1.animateLeft {
+    transform: translateX(54px);
+    opacity: 0;
+}
+
+.before1.animateLeft,
+.after1.animateLeft,
+.afterPoint1.animateLeft,
+.beforeEdge1.animateLeft {
+    transform: translateX(54px);
+}
+
+.point1.animateRight,
+.afterPoint1.animateRight {
+    transform: translateX(-59px);
+}
+
+.point1.animateRight,
+.point1.animateLeft,
+.point1.animatePop {
+    font-size: medium;
+}
+
+.beforeEdge1.animateRight {
+    transform: translateX(-54px);
+    opacity: 0;
+}
+
+.afterPoint1.animateRight {
+    font-size: xx-large;
+}
+
+.before1.animateRight,
+.after1.animateRight,
+.beforePoint1.animateRight,
+.afterEdge1.animateRight {
+    transform: translateX(-54px);
+}
+
+.point1 {
+    font-size: xx-large;
+}
+
+.point1.animatePop {
+    transform: translateY(-59px);
+    opacity: 0;
+}
+
+.popUp1,
+.beforeFade1,
+.afterFade1 {
+    opacity: 0;
+}
+
+.beforeFade1 {
+    transform: translateX(-54px);
+}
+
+.beforeFade1.animateLeft {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.afterFade1 {
+    transform: translateX(54px);
+}
+
+.afterFade1.animateRight {
+
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.popUp1.animatePop {
+    opacity: 1;
+    font-size: xx-large;
+}
+
+.animateLeft,
+.animateRight,
+.animatePop {
+    transition: 1s;
+    transition-timing-function: cubic-bezier(.60, 0, .40, 1);
+}
+
+.beforePoint2.animateLeft,
+.point2.animateLeft {
+    transform: translateX(59px);
+}
+
+.beforePoint2.animateLeft {
+    font-size: xx-large;
+}
+
+.afterEdge2.animateLeft {
+    transform: translateX(54px);
+    opacity: 0;
+}
+
+.before2.animateLeft,
+.after2.animateLeft,
+.afterPoint2.animateLeft,
+.beforeEdge2.animateLeft {
+    transform: translateX(54px);
+}
+
+.point2.animateRight,
+.afterPoint2.animateRight {
+    transform: translateX(-59px);
+}
+
+.point2.animateRight,
+.point2.animateLeft,
+.point2.animatePop {
+    font-size: medium;
+}
+
+.beforeEdge2.animateRight {
+    transform: translateX(-54px);
+    opacity: 0;
+}
+
+.afterPoint2.animateRight {
+    font-size: xx-large;
+}
+
+.before2.animateRight,
+.after2.animateRight,
+.beforePoint2.animateRight,
+.afterEdge2.animateRight {
+    transform: translateX(-54px);
+}
+
+.point2 {
+    font-size: xx-large;
+}
+
+.point2.animatePop {
+    transform: translateY(-59px);
+    opacity: 0;
+}
+
+.popUp2,
+.beforeFade2,
+.afterFade2 {
+    opacity: 0;
+}
+
+.beforeFade2 {
+    transform: translateX(-54px);
+}
+
+.beforeFade2.animateLeft {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.afterFade2 {
+    transform: translateX(54px);
+}
+
+.afterFade2.animateRight {
+
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.popUp2.animatePop {
+    opacity: 1;
+    font-size: xx-large;
+}
+
+.animateLeft,
+.animateRight,
+.animatePop {
+    transition: 1s;
+    transition-timing-function: cubic-bezier(.60, 0, .40, 1);
+}
+
+.beforePoint3.animateLeft,
+.point3.animateLeft {
+    transform: translateX(59px);
+}
+
+.beforePoint3.animateLeft {
+    font-size: xx-large;
+}
+
+.afterEdge3.animateLeft {
+    transform: translateX(54px);
+    opacity: 0;
+}
+
+.before3.animateLeft,
+.after3.animateLeft,
+.afterPoint3.animateLeft,
+.beforeEdge3.animateLeft {
+    transform: translateX(54px);
+}
+
+.point3.animateRight,
+.afterPoint3.animateRight {
+    transform: translateX(-59px);
+}
+
+.point3.animateRight,
+.point3.animateLeft,
+.point3.animatePop {
+    font-size: medium;
+}
+
+.beforeEdge3.animateRight {
+    transform: translateX(-54px);
+    opacity: 0;
+}
+
+.afterPoint3.animateRight {
+    font-size: xx-large;
+}
+
+.before3.animateRight,
+.after3.animateRight,
+.beforePoint3.animateRight,
+.afterEdge3.animateRight {
+    transform: translateX(-54px);
+}
+
+.point3 {
+    font-size: xx-large;
+}
+
+.point3.animatePop {
+    transform: translateY(-59px);
+    opacity: 0;
+}
+
+.popUp3,
+.beforeFade3,
+.afterFade3 {
+    opacity: 0;
+}
+
+.beforeFade3 {
+    transform: translateX(-54px);
+}
+
+.beforeFade3.animateLeft {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.afterFade3 {
+    transform: translateX(54px);
+}
+
+.afterFade3.animateRight {
+
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.popUp3.animatePop {
+    opacity: 1;
+    font-size: xx-large;
+}
+
+form {
+    margin-top: 20px; /* Margin at the top of the form */
+  }
+  
+  input[type="text"] {
+    padding: 10px; /* Padding inside the input field */
+    margin-bottom: 10px; /* Margin at the bottom */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  input[type="text"]:focus {
+    border-color: #4CAF50; /* Green border color when focused */
+    outline: none; /* No outline */
+  }
+  
+  button {
+    background-color: #008CBA; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* No border */
+    cursor: pointer; /* Cursor style on hover */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  button:hover {
+    background-color: #007A99; /* Darker blue background on hover */
+  }
+  

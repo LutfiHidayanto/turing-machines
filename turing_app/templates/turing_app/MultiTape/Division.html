@@ -1,0 +1,308 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Division - Multi Tape - Turing Machine Simulator</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
+    <link rel="stylesheet" href="{% static 'turing_app/css/MultiTape.css' %}">
+
+</head>
+
+<body>
+    <nav>
+        <h2>
+            <a href="../index.html" id="nav">Division</a>
+        </h2>
+    </nav>
+
+    <div id="input-form">
+        <div class="text-desc">String</div>
+        <div id="input-container">
+            <input type="text" id="input-string" placeholder="[+-]00*[+-]00*1" value={{ init_input }}>
+        </div>
+        <div id="btn-container">
+            <button type="button" id="input-sim" onclick="simulate()">Simulate</button>
+            <button type="button" id="input-reset" onclick="reset()" disabled>Reset</button>
+            <button type="button" id="input-step" onclick="step()" disabled>Step</button>
+            <button type="button" id="input-run" onclick="run()" disabled>Run</button>
+            <button type="button" id="input-fast" onclick="fast()" disabled>Fast</button>
+        </div>
+    </div>
+
+    <div id="output1">
+        <div><span>
+                <p class="beforeEdge1"></p>
+                <p style="position: absolute;" class="beforeFade1">B</p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="before1"></p>
+            </span></div>
+        <div><span>
+                <p class="beforePoint1"></p>
+            </span></div>
+        <div id="point1"><span>
+                <p class="point1"></p>
+                <p style="position: absolute;" class="popUp1">B</p>
+            </span></div>
+        <div><span>
+                <p class="afterPoint1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="after1"></p>
+            </span></div>
+        <div><span>
+                <p class="afterEdge1"></p>
+                <p style="position: absolute;" class="afterFade1">B</p>
+            </span></div>
+    </div>
+    <div id="output2">
+        <div><span>
+                <p class="beforeEdge2"></p>
+                <p style="position: absolute;" class="beforeFade2">B</p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="before2"></p>
+            </span></div>
+        <div><span>
+                <p class="beforePoint2"></p>
+            </span></div>
+        <div id="point2"><span>
+                <p class="point2"></p>
+                <p style="position: absolute;" class="popUp2">B</p>
+            </span></div>
+        <div><span>
+                <p class="afterPoint2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="after2"></p>
+            </span></div>
+        <div><span>
+                <p class="afterEdge2"></p>
+                <p style="position: absolute;" class="afterFade2">B</p>
+            </span></div>
+    </div>
+    <div id="output3" class="ending">
+        <div><span>
+                <p class="beforeEdge3"></p>
+                <p style="position: absolute;" class="beforeFade3">B</p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="before3"></p>
+            </span></div>
+        <div><span>
+                <p class="beforePoint3"></p>
+            </span></div>
+        <div id="point3"><span>
+                <p class="point3"></p>
+                <p style="position: absolute;" class="popUp3">B</p>
+            </span></div>
+        <div><span>
+                <p class="afterPoint3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="after3"></p>
+            </span></div>
+        <div><span>
+                <p class="afterEdge3"></p>
+                <p style="position: absolute;" class="afterFade3">B</p>
+            </span></div>
+    </div>
+
+    <div id="status-container">
+        <div id="small-container">
+            <div>
+                <div>Step</div>
+                <div id="stepCountOutput"></div>
+            </div>
+            <div>
+                <div>State</div>
+                <div id="stateOutput"></div>
+            </div>
+            <div>
+                <div>Status</div>
+                <div id="statusOutput"></div>
+            </div>
+        </div>
+        <div>
+            <div>Tape #1</div>
+            <div id="tapeOutput1"></div>
+        </div>
+        <div>
+            <div>Tape #2</div>
+            <div id="tapeOutput2"></div>
+        </div>
+        <div>
+            <div>Tape #3</div>
+            <div id="tapeOutput3"></div>
+        </div>
+    </div>
+
+    <script src="{% static 'turing_app/js/Multi3Tape.js' %}"></script>
+    <script src="{% static 'turing_app/js/link.js' %}"></script>
+</body>
+
+</html>

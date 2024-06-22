@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+    font-size: medium;
+}
+
+#input-form {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    flex-basis: content;
+}
+
+#text-desc,
+#input-container,
+#btn-container {
+    padding: 10px;
+}
+
+#input-string {
+    width: 300px;
+}
+
+#status-container,
+#stepCountOutput,
+#tapeOutput,
+#stateOutput,
+#statusOutput {
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+    flex-basis: content;
+    margin: 10px;
+}
+
+#tapeOutput {
+    max-width: 1000px;
+}
+
+#stepCountOutput,
+#tapeOutput,
+#stateOutput {
+    margin-bottom: 25px;
+}
+
+#output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+#output div {
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#output span {
+    outline: black solid 4px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#point {
+    background-color: yellow;
+}
+
+#point span {
+    height: 60px;
+    width: 60px;
+}
+
+.animateLeft,
+.animateRight,
+.animatePop {
+    transition: 1s;
+    transition-timing-function: cubic-bezier(.60, 0, .40, 1);
+}
+
+.beforePoint.animateLeft,
+.point.animateLeft {
+    transform: translateX(59px);
+}
+
+.beforePoint.animateLeft {
+    font-size: xx-large;
+}
+
+.afterEdge.animateLeft {
+    transform: translateX(54px);
+    opacity: 0;
+}
+
+.before.animateLeft,
+.after.animateLeft,
+.afterPoint.animateLeft,
+.beforeEdge.animateLeft {
+    transform: translateX(54px);
+}
+
+.point.animateRight,
+.afterPoint.animateRight {
+    transform: translateX(-59px);
+}
+
+.point.animateRight,
+.point.animateLeft,
+.point.animatePop {
+    font-size: medium;
+}
+
+.beforeEdge.animateRight {
+    transform: translateX(-54px);
+    opacity: 0;
+}
+
+.afterPoint.animateRight {
+    font-size: xx-large;
+}
+
+.before.animateRight,
+.after.animateRight,
+.beforePoint.animateRight,
+.afterEdge.animateRight {
+    transform: translateX(-54px);
+}
+
+.point {
+    font-size: xx-large;
+}
+
+.point.animatePop {
+    transform: translateY(-59px);
+    opacity: 0;
+}
+
+.popUp,
+.beforeFade,
+.afterFade {
+    opacity: 0;
+}
+
+.beforeFade {
+    transform: translateX(-54px);
+}
+
+.beforeFade.animateLeft {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.afterFade {
+    transform: translateX(54px);
+}
+
+.afterFade.animateRight {
+
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.popUp.animatePop {
+    opacity: 1;
+    font-size: xx-large;
+}
+
+#nav {
+    text-decoration: none;
+    color: black;
+}

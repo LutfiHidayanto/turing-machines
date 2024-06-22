@@ -1,0 +1,124 @@
+{% extends "index.html" %} 
+{% block body %}
+    <nav>
+        <h2>
+            <a href="./index.html" id="nav">Addition</a>
+        </h2>
+    </nav>
+
+    <div id="input-form">
+        <div class="text-desc">String</div>
+        <div id="input-container">
+            <input type="text" id="input-string" placeholder="[+-]0*[+-]0*">
+        </div>
+        <div id="btn-container">
+            <button type="button" id="input-sim" onclick="simulate()">Simulate</button>
+            <button type="button" id="input-reset" onclick="reset()" disabled>Reset</button>
+            <button type="button" id="input-step" onclick="step()" disabled>Step</button>
+            <button type="button" id="input-run" onclick="run()" disabled>Run</button>
+            <button type="button" id="input-fast" onclick="fast()" disabled>Fast</button>
+        </div>
+    </div>
+
+    <div id="output">
+        <div><span>
+                <p class="beforeEdge"></p>
+                <p style="position: absolute;" class="beforeFade">B</p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="before"></p>
+            </span></div>
+        <div><span>
+                <p class="beforePoint"></p>
+            </span></div>
+        <div id="point"><span>
+                <p class="point"></p>
+                <p style="position: absolute;" class="popUp">B</p>
+            </span></div>
+        <div><span>
+                <p class="afterPoint"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="after"></p>
+            </span></div>
+        <div><span>
+                <p class="afterEdge"></p>
+                <p style="position: absolute;" class="afterFade">B</p>
+            </span></div>
+    </div>
+
+    <div id="status-container">
+        <div>
+            <div>Step</div>
+            <div id="stepCountOutput"></div>
+        </div>
+        <div>
+            <div>State</div>
+            <div id="stateOutput"></div>
+        </div>
+        <div>
+            <div>Tape</div>
+            <div id="tapeOutput"></div>
+        </div>
+        <div>
+            <div>Status</div>
+            <div id="statusOutput"></div>
+        </div>
+    </div>
+
+    <script src="SingleTape.js"></script>
+{% endblock %}
