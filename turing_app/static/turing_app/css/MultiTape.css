@@ -1,26 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 5rem;
     text-align: center;
     font-size: medium;
-    background-color: #1f2937;
+    background-color: #111827;
     color: #f8f9fa; /* Light text color */
+}
+nav {
+    color: white;
 }
 
 nav a {
     color: white;
 }
 
-
-#input-form {
-    padding: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border: 1px solid white;
-    flex-basis: content;
+.hidden {
+    display:  none;
 }
 
 #input-form input {
@@ -37,41 +33,47 @@ nav a {
     width: 300px;
 }
 
-#status-container,
 #stepCountOutput,
 #tapeOutput1, #tapeOutput2, #tapeOutput3,
 #stateOutput,
 #statusOutput {
-    padding: 10px;
+    padding: 2rem;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid white;
+    border: 2px solid white;
     flex-basis: content;
     margin: 10px;
 }
 
-#status-container {
-    margin-bottom: 0;
+.container-card {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    background-color: #1f2937;
+    border-radius: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    color: #ffffff; /* White text */
 }
 
-#small-container {
-    display: inline-flex;
-    flex-direction: row;
+.small-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    width: 100%;
 }
 
 #tapeOutput1, #tapeOutput2, #tapeOutput3 {
     max-width: 1000px;
 }
 
-#stepCountOutput,
-#stateOutput,
-#statusOutput {
-    margin-bottom: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
-}
 
 #output1, #output2, #output3 {
     display: flex;
@@ -110,7 +112,6 @@ nav a {
 
 #nav {
     text-decoration: none;
-    color: black;
 }
 
 h2 {
@@ -403,30 +404,29 @@ h2 {
 form {
     margin-top: 20px; /* Margin at the top of the form */
   }
-  
-  input[type="text"] {
+
+input[type="text"] {
     padding: 10px; /* Padding inside the input field */
     margin-bottom: 10px; /* Margin at the bottom */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     border: 1px solid #ccc; /* Gray border */
     border-radius: 4px; /* Rounded corners */
-  }
-  
-  input[type="text"]:focus {
+}
+
+input[type="text"]:focus {
     border-color: #4CAF50; /* Green border color when focused */
     outline: none; /* No outline */
-  }
-  
-  button {
+}
+
+button {
     background-color: #008CBA; /* Blue background */
     color: white; /* White text */
     padding: 10px 20px; /* Padding inside the button */
     border: none; /* No border */
     cursor: pointer; /* Cursor style on hover */
     border-radius: 5px; /* Rounded corners */
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #007A99; /* Darker blue background on hover */
-  }
-  
+}
