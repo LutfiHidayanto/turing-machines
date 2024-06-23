@@ -2,11 +2,110 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect 
 from django.urls import reverse
 import math
+from .turingCase0 import *
 
 # Create your views here.
 
 BASE_DIR = 'turing_app/'
 MULTI_DIR = 'MultiTape/'
+CASE_0_DIR = 'Case0/'
+
+def case_0(request):
+    if request.method == 'POST':
+        m = request.POST.get('m')
+        n = request.POST.get('n')
+        a = request.POST.get('a')
+        b = request.POST.get('b')
+
+        data = {
+            'm': m,
+            'n': n,
+            'a': a,
+            'b': b,
+        }
+     
+        tm = Turing(m, n, a, b)
+
+        print(m, n, a, b)
+
+        max_iterations = 1000  
+        tape_a = []
+        tape_b = []
+        tape_c = []
+        tape_final = []
+        for tm.step in range(max_iterations):
+            if tm.inFinState:
+                break  
+            tm.log()
+            tape_a.append(tm.tapeA[:])  # Append a copy of tm.tapeA
+            tape_b.append(tm.tapeB[:])  # Append a copy of tm.tapeB
+            tape_c.append(tm.tapeDiv[:])  # Append a copy of tm.tapeDiv
+            tape_final.append(tm.tapeLog[:])  # Append a copy of tm.tapeLog
+        
+        print(tape_final)
+        tape_log = {
+            'tape_a': tape_a,
+            'tape_b': tape_b,
+            'tape_c': tape_c,
+            'tape_final': tape_final
+        }
+
+        # Reset head log dan current state
+        tm.resetHead(10, "log")
+        tm.reset(False, 0, 0)
+
+        # Multiplication process
+        tape_a = []
+        tape_b = []
+        tape_final = []
+        for tm.step in range(max_iterations):
+            if tm.inFinState:
+                print("End Mul")
+                break
+            tm.multiplication()
+            tape_a.append(tm.tapeM[:])  # Append a copy of tm.tapeM
+            tape_b.append(tm.tapeLog[:])  # Append a copy of tm.tapeMul
+            tape_final.append(tm.tapeMul[:])  # Append a copy of tm.tapeFin
+
+        tape_mul = {
+            'tape_a': tape_a,
+            'tape_b': tape_b,
+            'tape_final_mul': tape_final
+        }
+
+        # Reset head mul dan current state
+        tm.resetHead(10, "mul")
+        tm.reset(False, 0, 0)
+
+        # Division process
+        tape_a = []
+        tape_b = []
+        tape_final = []
+        for tm.step in range(max_iterations):
+            if tm.inFinState:
+                print("End Div")
+                break
+            tm.division()
+            tape_a.append(tm.tapeN[:])  # Append a copy of tm.tapeM
+            tape_b.append(tm.tapeMul[:])  # Append a copy of tm.tapeLog
+            tape_final.append(tm.tapeFin[:])  # Append a copy of tm.tapeMul
+
+        tape_div = {
+            'tape_a': tape_a,
+            'tape_b': tape_b,
+            'tape_final_div': tape_final
+        }
+
+        context = {
+            'tape_log': tape_log,
+            'tape_mul': tape_mul,
+            'tape_div': tape_div,
+        }
+
+        return render(request, BASE_DIR + CASE_0_DIR + 'case0.html', context)
+
+    return render(request, BASE_DIR + CASE_0_DIR + 'case0.html')
+
 def index(request):
     return render(request, BASE_DIR + 'index.html')
 

@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Turing Machine States</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        .highlight {
+            background-color: yellow; /* Highlight color */
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'turing_app/css/case0.css' %}">
+</head>
+<body>
+    <h1>Turing Machine States</h1>
+    <form id="turingForm" method="POST">
+        {% csrf_token %}
+        <label for="m">m:</label>
+        <input type="number" id="m" name="m" required>
+        <label for="n">n:</label>
+        <input type="number" id="n" name="n" required>
+        <label for="a">a:</label>
+        <input type="number" id="a" name="a" required>
+        <label for="b">b:</label>
+        <input type="number" id="b" name="b" required>
+        <button type="submit">Run Turing Machine</button>
+    </form>
+
+    <h2>Logarithm</h2>
+    {% if tape_log %}
+        {% for tape, values in tape_log.items %}
+            <h3>{{ tape }}</h3>
+            <table id="{{ tape }}_table">
+                <tr>
+                    {% for symbol in values.0 %} {# Display only the first row initially #}
+                        <td>{{ symbol }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Multiplication</h2>
+    {% if tape_mul %}
+        {% for tape, values in tape_mul.items %}
+            <h3>{{ tape }}</h3>
+            <table id="{{ tape }}_table">
+                <tr>
+                    {% for symbol in values.0 %}
+                        <td>{{ symbol }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Division</h2>
+    {% if tape_div %}
+        {% for tape, values in tape_div.items %}
+            <h3>{{ tape }}</h3>
+            <table id="{{ tape }}_table">
+                <tr>
+                    {% for symbol in values.0 %}
+                        <td>{{ symbol }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        // Function to animate each table
+        function animateTable(tableId, data) {
+            const table = document.getElementById(tableId);
+            let rowIndex = 1; // Start from the second row
+
+            let interval = setInterval(() => {
+                if (rowIndex < data.length) {
+                    // Update table row with new data
+                    let newRow = '';
+                    for (let symbol of data[rowIndex]) {
+                        newRow += `<td>${symbol}</td>`;
+                    }
+                    table.innerHTML += `<tr>${newRow}</tr>`;
+
+                    // Highlight the newly added row
+                    let rows = table.getElementsByTagName('tr');
+                    rows[rowIndex].classList.add('highlight');
+
+                    // Remove highlight after a short delay (adjust as needed)
+                    setTimeout(() => {
+                        rows[rowIndex].classList.remove('highlight');
+                    }, 500); // Adjust timing if needed
+
+                    rowIndex++;
+                } else {
+                    clearInterval(interval); // Stop animation when all rows are displayed
+                }
+            }, 1000); // Adjust timing between rows (milliseconds)
+        }
+
+        // Run animation for each tape table
+        window.onload = function() {
+            animateTables();
+        };
+
+        function animateTables() {
+            // Adjust speed (in milliseconds) for animation
+            const animationSpeed = 1000; // 1 second per step
+
+            // Get all table elements
+            const tables = document.getElementsByTagName('table');
+
+            // Iterate over each table
+            for (let table of tables) {
+                let tableId = table.getAttribute('id');
+                let data = window[tableId.replace('_table', '')]; // Retrieve data from global variable
+                animateTable(tableId, data);
+            }
+        }
+
+        // Optionally, run animation on form submission (after POST request)
+        document.getElementById('turingForm').addEventListener('submit', function() {
+            setTimeout(() => {
+                animateTables();
+            }, 1000); // Delay 1 second before starting animation after form submission
+        });
+    </script>
+</body>
+</html>

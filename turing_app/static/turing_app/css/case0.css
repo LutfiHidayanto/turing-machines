@@ -1,0 +1,13 @@
+.kotak {
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid black;
+    margin-bottom: 2px;
+}
+
+.output-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
