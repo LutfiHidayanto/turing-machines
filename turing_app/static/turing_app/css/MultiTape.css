@@ -418,7 +418,7 @@ input[type="text"]:focus {
     outline: none; /* No outline */
 }
 
-button {
+button, select {
     background-color: #008CBA; /* Blue background */
     color: white; /* White text */
     padding: 10px 20px; /* Padding inside the button */

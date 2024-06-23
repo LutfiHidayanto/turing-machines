@@ -11,11 +11,9 @@
 </head>
 
 <body>
-    <nav>
-        <h2>
-            <a href="../index.html" id="nav">Addition</a>
-        </h2>
-    </nav>
+    <h2>
+        <a href="../index.html" id="nav">Addition</a>
+    </h2>
 
     <div class="container-card">
         <div id="output1">
@@ -218,6 +216,12 @@
             <button type="button" id="input-step" onclick="step()" disabled>Step</button>
             <button type="button" id="input-run" onclick="run()" disabled>Run</button>
             <button type="button" id="input-fast" onclick="fast()" disabled>Fast</button>
+            <select id="select-speed">
+                <option value="1ms">1ms</option>
+                <option value="100ms">100ms</option>
+                <option value="5000ms">5000ms</option>
+                <option value="1000ms" selected>1000ms</option>
+            </select>
         </div>
     </div>
 
