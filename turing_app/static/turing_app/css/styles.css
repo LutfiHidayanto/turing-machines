@@ -102,7 +102,7 @@ nav a {
 }
 
 #point1, #point2, #point3 {
-    background-color: green;
+    background-color: #0891b2;
 }
 
 #point1 span, #point2 span, #point3 span {
@@ -179,7 +179,7 @@ h2 {
 }
 
 .point1.animatePop {
-    transform: translateY(-59px);
+    transform: translateY(59px);
     opacity: 0;
 }
 
@@ -273,7 +273,7 @@ h2 {
 }
 
 .point2.animatePop {
-    transform: translateY(-59px);
+    transform: translateY(59px);
     opacity: 0;
 }
 
@@ -367,7 +367,7 @@ h2 {
 }
 
 .point3.animatePop {
-    transform: translateY(-59px);
+    transform: translateY(59px);
     opacity: 0;
 }
 

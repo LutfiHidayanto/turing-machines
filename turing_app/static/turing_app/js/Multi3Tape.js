@@ -1,11 +1,11 @@
 var patternRe = [];
 patternRe["Addition"] = new RegExp(/^(\s*[+-][\s0]*[+-][\s0]*)$/); 
-patternRe["Division"] = new RegExp(/^\s*[+-]\s*0[\s0]*[+-]\s*0[\s0]*1\s*$/); 
-patternRe["Power"] = new RegExp(/^\s*0[\s0]*1\s*0[\s0]*1\s*$/); 
+// patternRe["Division"] = new RegExp(/^\s*[+-]\s*0[\s0]*[+-]\s*0[\s0]*1\s*$/); 
+patternRe["Division"] = new RegExp('^[+-]0*[+-]0*1$');
+
+// patternRe["Power"] = new RegExp(/^\s*0[\s0]*1\s*0[\s0]*1\s*$/); 
 
 var finalStates = [];
-finalStates["Addition"] = 4;
-finalStates["Subtraction"] = 4;
 finalStates["Multiplication"] = 10;
 finalStates["Division"] = 10;
 finalStates["Factorial"] = 17;
@@ -82,12 +82,12 @@ function init() {
 
 function step() {
     if (anim === 0) {
-        if (state === finalStates[document.getElementById("nav").textContent])
+        if (state === finalStates[document.getElementById("type").textContent])
             document.getElementById("input-step").disabled = true;
         else {
             move = false;
 
-            switch (document.getElementById("nav").textContent) {
+            switch (document.getElementById("type").textContent) {
                 case "Multiplication":
                     multiplication();
                     break;
@@ -99,9 +99,11 @@ function step() {
                     break;
             }
 
-            if (!move && !(state === finalStates[document.getElementById("nav").textContent])) {
+            if (!move && !(state === finalStates[document.getElementById("type").textContent])) {
                 document.getElementById("input-step").disabled = true;
                 statusOutput.textContent = "Rejected";
+                statusOutput.style.backgroundColor = "#ef4444"
+                tapeOutput3.textContent = "11 (Undefined)"
             }
         }
     } else {
@@ -139,7 +141,7 @@ function action(replaceWith1, replaceWith2, replaceWith3, move1, move2, move3, n
     if (move3 === 'L') head3--;
     else if (move3 === 'R') head3++;
 
-    move = (state === finalStates[document.getElementById("nav").textContent] ? false : true);
+    move = (state === finalStates[document.getElementById("type").textContent] ? false : true);
 
     anim = 1;
     document.getElementsByClassName("popUp1")[0].textContent = replaceWith1;
@@ -185,9 +187,9 @@ function display() {
     }
 
     if (anim === 0) {
-        if (state === finalStates[document.getElementById("nav").textContent] || !move) {
-            statusOutput.style.background = (state === finalStates[document.getElementById("nav").textContent] ? "green" : "red");
-            statusOutput.textContent = (state === finalStates[document.getElementById("nav").textContent] ? "Accepted" : "Rejected");
+        if (state === finalStates[document.getElementById("type").textContent] || !move) {
+            statusOutput.style.background = (state === finalStates[document.getElementById("type").textContent] ? "#16a34a" : "#ef4444");
+            statusOutput.textContent = (state === finalStates[document.getElementById("type").textContent] ? "Accepted" : "Rejected");
         }
         stepCountOutput.textContent = stepCount;
         stateOutput.textContent = "q" + state;
@@ -402,7 +404,7 @@ function animateRight3() {
 
 
 function simulate() {
-    if (!(patternRe[document.getElementById("nav").textContent].test(document.getElementById("input-string").value))) {
+    if (!(patternRe[document.getElementById("type").textContent].test(document.getElementById("input-string").value))) {
         alert("Format string tidak sesuai!\nFormat: " + document.getElementById("input-string").getAttribute("placeholder"));
         return;
     }
@@ -493,6 +495,29 @@ setInterval(() => {
 
 function division() {
     switch (state) {
+        // case 100:
+        //     if (tape1[head1] === '+' && tape2[head2] === "B" && tape3[head3] === "B") action('+', 'B', 'B', 'R', 'S', 'S', 100);
+        //     else if (tape1[head1] === '-' && tape2[head2] === "B" && tape3[head3] === "B") action('-', 'B', 'B', 'R', 'S', 'S', 100);
+        //     else if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") {
+        //         console.log("100 to 100");
+        //         action('0', 'B', 'B', 'R', 'S', 'S', 100);
+        //     }
+        //     else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('1', 'B', 'B', 'L', 'S', 'S', 99);
+        //     break;
+        // case 99:
+        //     if (tape1[head1] === '+' && tape2[head2] === "B" && tape3[head3] === "B") action('+', 'B', 'B', 'S', 'S', 'S', finalStates[document.getElementById("type").textContent]);
+        //     else if (tape1[head1] === '-' && tape2[head2] === "B" && tape3[head3] === "B") action('-', 'B', 'B', 'S', 'S', 'S', finalStates[document.getElementById("type").textContent]);
+        //     else if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B")  {
+        //         console.log("99 to 97");
+        //         action('0', 'B', 'B', 'L', 'S', 'S', 97); 
+        //     }
+        //     break;
+        // case 97:
+        //     if (tape1[head1] === '+' && tape2[head2] === "B" && tape3[head3] === "B") action('+', 'B', 'B', 'L', 'S', 'S', 97);
+        //     else if (tape1[head1] === '-' && tape2[head2] === "B" && tape3[head3] === "B") action('-', 'B', 'B', 'L', 'S', 'S', 97);
+        //     else if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('0', 'B', 'B', 'L', 'S', 'S', 97);
+        //     else if (tape1[head1] === 'B' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', 'B', 'R', 'S', 'S', 1);
+        //     break;
         case 1:
             if (tape1[head1] === '+' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', 'B', 'R', 'S', 'S', 2);
             else if (tape1[head1] === '-' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', 'B', 'R', 'S', 'S', 3);
@@ -517,55 +542,18 @@ function division() {
             break;
         case 7:
             if (tape1[head1] === '0' && tape2[head2] === "0" && tape3[head3] === "B") action('0', '0', 'B', 'L', 'L', 'S', 7);
-            else if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('B', '0', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('B', '0', '1', 'S', 'S', 'R', finalStates[document.getElementById("type").textContent]);
             else if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('0', 'B', '0', 'S', 'R', 'R', 8);
             else if (tape1[head1] === 'B' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '0', 'S', 'S', 'R', 9);
             break;
         case 8:
             if (tape1[head1] === '0' && tape2[head2] === "0" && tape3[head3] === "B") action('0', '0', 'B', 'L', 'R', 'S', 8);
-            else if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("type").textContent]);
             else if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('0', 'B', '0', 'S', 'L', 'R', 7);
             else if (tape1[head1] === 'B' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '0', 'S', 'S', 'R', 9);
             break;
         case 9:
-            if (tape1[head1] === 'B' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
-            break;
-    }
-}
-
-function binaryLogarithm() {
-    switch (state) {
-        case 1:
-            if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('B', '1', 'B', 'R', 'R', 'S', 2);
-            else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
-            break;
-        case 2:
-            if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('B', '0', 'B', 'R', 'R', 'S', 3);
-            else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
-            break;
-        case 3:
-            if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', 'B', 'R', 'S', 'S', 4);
-            else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '0', 'S', 'L', 'R', 5);
-            break;
-        case 4:
-            if (tape1[head1] === '0' && tape2[head2] === "B" && tape3[head3] === "B") action('B', '0', 'B', 'R', 'R', 'S', 3);
-            else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '0', 'S', 'L', 'R', 5);
-            break;
-        case 5:
-            if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('1', 'B', 'B', 'L', 'L', 'S', 6);
-            else if (tape1[head1] === '1' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
-            break;
-        case 6:
-            if (tape1[head1] === 'B' && tape2[head2] === "1" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
-            else if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('0', 'B', 'B', 'L', 'L', 'S', 7);
-            break;
-        case 7:
-            if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('B', 'B', 'B', 'S', 'L', 'S', 8);
-            else if (tape1[head1] === 'B' && tape2[head2] === "1" && tape3[head3] === "B") action('B', 'B', '0', 'R', 'S', 'R', 1);
-            break;
-        case 8:
-            if (tape1[head1] === 'B' && tape2[head2] === "0" && tape3[head3] === "B") action('0', 'B', 'B', 'L', 'L', 'S', 7);
-            else if (tape1[head1] === 'B' && tape2[head2] === "1" && tape3[head3] === "B") action('B', 'B', '0', 'R', 'S', 'R', 1);
+            if (tape1[head1] === 'B' && tape2[head2] === "B" && tape3[head3] === "B") action('B', 'B', '1', 'S', 'S', 'R', finalStates[document.getElementById("type").textContent]);
             break;
     }
 }

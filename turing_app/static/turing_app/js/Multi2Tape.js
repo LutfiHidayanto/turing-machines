@@ -1,8 +1,9 @@
 var patternRe = [];
 patternRe["Addition"] = new RegExp(/^(\s*[+-][\s0]*[+-][\s0]*)$/); 
-patternRe["Division"] = new RegExp(/^\s*[+-]\s*0[\s0]*[+-]\s*0[\s0]*1\s*$/); 
-patternRe["Power"] = new RegExp(/^\s*0[\s0]*1\s*0[\s0]*1\s*$/); 
+// patternRe["Power"] = new RegExp(/^\s*0[\s0]*1\s*0[\s0]*1\s*$/); 
+patternRe["Power"] = new RegExp('^0*10*1$');
 
+// 0 ^ 1 udah, 1^ 0 belom (101)
 var finalStates = [];
 finalStates["Addition"] = 4;
 finalStates["Division"] = 10;
@@ -70,32 +71,25 @@ function init() {
 
 function step() {
     if (anim === 0) {
-        if (state === finalStates[document.getElementById("nav").textContent])
+        if (state === finalStates[document.getElementById("type").textContent])
             document.getElementById("input-step").disabled = true;
         else {
             move = false;
 
-            switch (document.getElementById("nav").textContent) {
+            switch (document.getElementById("type").textContent) {
                 case "Addition":
                     addition();
-                    break;
-                case "Subtraction":
-                    subtraction();
-                    break;
-                case "Factorial":
-                    factorial();
                     break;
                 case "Power":
                     power();
                     break;
-                case "Square Root":
-                    squareRoot();
-                    break;
             }
 
-            if (!move && !(state === finalStates[document.getElementById("nav").textContent])) {
+            if (!move && !(state === finalStates[document.getElementById("type").textContent])) {
                 document.getElementById("input-step").disabled = true;
                 statusOutput.textContent = "Rejected";
+                statusOutput.style.backgroundColor = "#ef4444"
+                tapeOutput1.textContent = "11 (Undefined)"
             }
         }
     } else {
@@ -128,7 +122,7 @@ function action(replaceWith1, replaceWith2, move1, move2, newState) {
     if (move2 === 'L') head2--;
     else if (move2 === 'R') head2++;
 
-    move = (state === finalStates[document.getElementById("nav").textContent] ? false : true);
+    move = (state === finalStates[document.getElementById("type").textContent] ? false : true);
 
     anim = 1;
     document.getElementsByClassName("popUp1")[0].textContent = replaceWith1;
@@ -162,9 +156,9 @@ function display() {
     }
 
     if (anim === 0) {
-        if (state === finalStates[document.getElementById("nav").textContent] || !move) {
-            statusOutput.style.background = (state === finalStates[document.getElementById("nav").textContent] ? "green" : "red");
-            statusOutput.textContent = (state === finalStates[document.getElementById("nav").textContent] ? "Accepted" : "Rejected");
+        if (state === finalStates[document.getElementById("type").textContent] || !move) {
+            statusOutput.style.backgroundColor = (state === finalStates[document.getElementById("type").textContent] ? "#16a34a" : "#ef4444");
+            statusOutput.textContent = (state === finalStates[document.getElementById("type").textContent] ? "Accepted" : "Rejected");
         }
         stepCountOutput.textContent = stepCount;
         stateOutput.textContent = "q" + state;
@@ -199,7 +193,7 @@ function animateLeft1() {
         document.getElementsByClassName("after1")[x].classList.toggle("animateLeft");
     document.getElementsByClassName("beforePoint1")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("beforeEdge1")[0].classList.toggle("animateLeft");
-    document.getElementsByClassName("beforeFade1")[0].textContent = tape1[tempHead1 - 13]; //trick tengen kiwo
+    document.getElementsByClassName("beforeFade1")[0].textContent = tape1[tempHead1 - 13]; 
     document.getElementsByClassName("beforeFade1")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("afterPoint1")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("afterEdge1")[0].classList.toggle("animateLeft");
@@ -229,7 +223,7 @@ function animateLeft2() {
         document.getElementsByClassName("after2")[x].classList.toggle("animateLeft");
     document.getElementsByClassName("beforePoint2")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("beforeEdge2")[0].classList.toggle("animateLeft");
-    document.getElementsByClassName("beforeFade2")[0].textContent = tape2[tempHead2 - 13]; //trick tengen kiwo
+    document.getElementsByClassName("beforeFade2")[0].textContent = tape2[tempHead2 - 13]; 
     document.getElementsByClassName("beforeFade2")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("afterPoint2")[0].classList.toggle("animateLeft");
     document.getElementsByClassName("afterEdge2")[0].classList.toggle("animateLeft");
@@ -313,7 +307,7 @@ function animateRight2() {
 }
 
 function simulate() {
-    if (!(patternRe[document.getElementById("nav").textContent].test(document.getElementById("input-string").value))) {
+    if (!(patternRe[document.getElementById("type").textContent].test(document.getElementById("input-string").value))) {
         alert("Format string tidak sesuai!\nFormat: " + document.getElementById("input-string").getAttribute("placeholder"));
         return;
     }
@@ -403,14 +397,32 @@ function power() {
     switch (state) {
         case 1:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 2);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('0', 'B', 'R', 'S', 21);
+            break;
+        case 21:
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 24);
+            break;
+        case 24:
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 24);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 2:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'R', 'S', 3);
             else if (tape1[head1] === '1' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 7);
+            // else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'R', 'S', 7);
             break;
         case 3:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'R', 'S', 3);
-            else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'R', 'S', 4);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'R', 'S', 22);
+            break;
+        case 22:
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 4);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'L', 'S', 23);
+            break;
+        case 23:
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'L', 'S', 23);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('B', 'B', 'L', 'S', 23);
+            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', 'B', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 4:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 4);
@@ -426,9 +438,10 @@ function power() {
             break;
         case 7:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'S', 'L', 8);
+            else if (tape1[head1] === '1' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 8:
-            if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'S', 'R', finalStates[document.getElementById("nav").textContent]);
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'S', 'R', finalStates[document.getElementById("type").textContent]);
             else if (tape1[head1] === '0' && tape2[head2] === "1") action('0', '1', 'S', 'L', 9);
             break;
         case 9:
@@ -480,7 +493,7 @@ function power() {
             break;
         case 18:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'R', 'S', 18);
-            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'R', 'S', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'R', 'S', finalStates[document.getElementById("type").textContent]);
             break;
     }
 }
@@ -498,7 +511,7 @@ function addition() {
             break;
         case 3:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 3);
-            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 5:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'L', 'S', 5);
@@ -516,7 +529,7 @@ function addition() {
             if (tape1[head1] === '0' && tape2[head2] === "0") action('B', 'B', 'L', 'L', 8);
             else if (tape1[head1] === '-' && tape2[head2] === "0") action('B', '0', 'S', 'R', 15);
             else if (tape1[head1] === '0' && tape2[head2] === "+") action('0', 'B', 'R', 'S', 16);
-            else if (tape1[head1] === '-' && tape2[head2] === "+") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === '-' && tape2[head2] === "+") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 9:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 9);
@@ -525,7 +538,7 @@ function addition() {
             break;
         case 10:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 10);
-            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 12:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 12);
@@ -539,19 +552,19 @@ function addition() {
             if (tape1[head1] === '0' && tape2[head2] === "0") action('B', 'B', 'L', 'L', 14);
             else if (tape1[head1] === '+' && tape2[head2] === "0") action('B', '0', 'S', 'R', 17);
             else if (tape1[head1] === '0' && tape2[head2] === "-") action('0', 'B', 'R', 'S', 18);
-            else if (tape1[head1] === '+' && tape2[head2] === "-") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            else if (tape1[head1] === '+' && tape2[head2] === "-") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 15:
-            if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 16:
-            if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 17:
-            if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
         case 18:
-            if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("nav").textContent]);
+            if (tape1[head1] === 'B' && tape2[head2] === "B") action('1', 'B', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
 
     }

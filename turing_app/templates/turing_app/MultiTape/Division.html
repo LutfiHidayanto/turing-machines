@@ -6,15 +6,13 @@
 <head>
     <title>Division - Multi Tape - Turing Machine Simulator</title>
     <link rel="icon" type="image/x-icon" href="../favicon.png">
-    <link rel="stylesheet" href="{% static 'turing_app/css/MultiTape.css' %}">
+    <link rel="stylesheet" href="{% static 'turing_app/css/styles.css' %}">
 
 </head>
 
 <body>
     <nav>
-        <h2>
-            <a href="../index.html" id="nav">Division</a>
-        </h2>
+        <h2 id="type">Division</h2>
     </nav>
     <main>
         <div class="container-card">
@@ -390,7 +388,7 @@
         <div id="input-form" class="container-card">
             <div class="text-desc">String</div>
             <div id="input-container">
-                <input type="text" id="input-string" placeholder="[+-]00*[+-]00*1" value={{ init_input }}>
+                <input type="text" id="input-string" placeholder="[+-]0*[+-]0*1" value={{ init_input }}>
             </div>
             <div id="btn-container">
                 <button type="button" id="input-sim" onclick="simulate()">Simulate</button>
@@ -401,8 +399,10 @@
                 <select id="select-speed">
                     <option value="1ms">1ms</option>
                     <option value="100ms">100ms</option>
-                    <option value="5000ms">5000ms</option>
+                    <option value="500ms">500ms</option>
                     <option value="1000ms" selected>1000ms</option>
+                    <option value="1500ms">1500ms</option>
+                    <option value="2000ms">2000ms</option>
                 </select>
             </div>
         </div>
