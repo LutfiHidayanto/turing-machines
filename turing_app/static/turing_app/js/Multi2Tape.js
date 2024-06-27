@@ -540,6 +540,10 @@ function addition() {
             if (tape1[head1] === '0' && tape2[head2] === "B") action('0', '0', 'R', 'R', 10);
             else if (tape1[head1] === 'B' && tape2[head2] === "B") action('B', '1', 'S', 'S', finalStates[document.getElementById("type").textContent]);
             break;
+        case 11:
+            if (tape1[head1] === '0' && tape2[head2] === "B") action('0', 'B', 'L', 'S', 11);
+            else if (tape1[head1] === '-' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 12);
+            break;
         case 12:
             if (tape1[head1] === '0' && tape2[head2] === "B") action('B', 'B', 'R', 'S', 12);
             else if (tape1[head1] === '+' && tape2[head2] === "B") action('+', 'B', 'R', 'S', 13);
